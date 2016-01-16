@@ -14,5 +14,19 @@ NOTES:
 */
 
 int findSingleOccurenceNumber(int *A, int len) {
+	if (A==0)
 	return -1;
+	int ones = 0, twos = 0, i;
+	int common_bit_mask;
+	for (i = 0; i< len; i++)
+	{
+		twos = twos | (ones & A[i]);
+		ones = ones ^ A[i];
+
+		common_bit_mask = ~(ones & twos);
+		ones &= common_bit_mask;
+		twos &= common_bit_mask;
+	}
+
+	return ones;
 }
